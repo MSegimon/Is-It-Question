@@ -1,9 +1,12 @@
 import pandas as pd
+import numpy as np
+
+# Other files
 import core
 
+
 # Establish connection
-core.connect()
+#core.connect()
 
 # Main code
-response = core.run_query("SELECT * FROM chatbot")
-print(response)
+
