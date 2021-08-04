@@ -3,10 +3,11 @@ import numpy as np
 
 # Other files
 import core
+import cosineSimilarity
 
 
 # Establish connection
-#core.connect()
+core.connect()
 
 # Main code
 

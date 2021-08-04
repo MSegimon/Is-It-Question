@@ -29,9 +29,3 @@ def cosineSimilarity(s1, s2):
     cosine = get_cosine(vector1, vector2)
 
     return cosine
-
-text1 = "what is the best economic system"
-text2 = "what is your name"
-
-num = cosineSimilarity(text1, text2)
-print(num)
