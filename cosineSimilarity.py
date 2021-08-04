@@ -22,13 +22,16 @@ def text_to_vector(text):
     words = WORD.findall(text)
     return Counter(words)
 
+def cosineSimilarity(s1, s2):
+    vector1 = text_to_vector(text1)
+    vector2 = text_to_vector(text2)
+
+    cosine = get_cosine(vector1, vector2)
+
+    return cosine
 
 text1 = "what is the best economic system"
 text2 = "what is your name"
 
-vector1 = text_to_vector(text1)
-vector2 = text_to_vector(text2)
-
-cosine = get_cosine(vector1, vector2)
-
-print("Cosine:", cosine)
+num = cosineSimilarity(text1, text2)
+print(num)
