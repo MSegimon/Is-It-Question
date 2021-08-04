@@ -70,13 +70,11 @@ def close_ssh_tunnel():
 
     tunnel.close
 
+# Simplify connection and disconnection
+def connect():
+    open_ssh_tunnel()
+    mysql_connect()
 
-# Run code
-open_ssh_tunnel()
-mysql_connect()
-df = run_query("SELECT * FROM chatbot")
-df.head()
-print(df)
-
-mysql_disconnect()
-close_ssh_tunnel()
+def disconnect():
+    mysql_disconnect()
+    close_ssh_tunnel()
