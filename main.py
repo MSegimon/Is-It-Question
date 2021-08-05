@@ -38,9 +38,7 @@ def isQuestion(text):
     questionsMean = questionsSum / len(questions)
     answersMean = answersSum / len(answers)
 
-    print(questionsMean)
-    print(otherFunctions.percentageDiff(questionsMean, answersMean))
-
+    # check if it is question
     if otherFunctions.percentageDiff(questionsMean, answersMean) <= 40:
         print('Unknown')
     elif questionsMean > answersMean:
