@@ -4,6 +4,7 @@ import numpy as np
 # Other files
 import core
 import cosineSimilarity
+import otherFunctions
 
 
 # Establish connection
@@ -38,10 +39,17 @@ def isQuestion(text):
     answersMean = answersSum / len(answers)
 
     print(questionsMean)
-    print(answersMean)
+    print(otherFunctions.percentageDiff(questionsMean, answersMean))
+
+    if otherFunctions.percentageDiff(questionsMean, answersMean) <= 40:
+        print('Unknown')
+    elif questionsMean > answersMean:
+        print('its a question')
+    elif answersMean > questionsMean:
+        print('it is not a question')
 
 
-isQuestion('what is the answer to life')
+isQuestion('this is america')
 
 # Disconnect from server
 core.disconnect()
