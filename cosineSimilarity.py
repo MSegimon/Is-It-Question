@@ -23,8 +23,8 @@ def text_to_vector(text):
     return Counter(words)
 
 def cosineSimilarity(s1, s2):
-    vector1 = text_to_vector(text1)
-    vector2 = text_to_vector(text2)
+    vector1 = text_to_vector(s1)
+    vector2 = text_to_vector(s2)
 
     cosine = get_cosine(vector1, vector2)
 

@@ -15,7 +15,7 @@ def isQuestion(text):
     questionsResult = core.run_query("SELECT text FROM chatbot WHERE isQuestion = 1")
     answersResult = core.run_query("SELECT text FROM chatbot WHERE isQuestion = 0")
 
-    # Convert question result to array
+    # Convert question and answer result to arrays
     questions = []
     answers = []
     for index, row in questionsResult.iterrows():
@@ -24,10 +24,20 @@ def isQuestion(text):
     for index, row in answersResult.iterrows():
         answers.append(row['text'])
 
-    print(answers)
+    # Get the sum of cosine similarities
+    questionsSum = 0.0
+    answersSum = 0.0
+    for string in questions:
+        questionsSum += cosineSimilarity.cosineSimilarity(text, string)
+    
+    for string in answers:
+        answersSum += cosineSimilarity.cosineSimilarity(text, string)
+
+    print(questionsSum)
+    print(answersSum)
 
 
-isQuestion('yeet')
+isQuestion('what is the answer to life')
 
 # Disconnect from server
 core.disconnect()
