@@ -11,9 +11,14 @@ core.connect()
 
 # Main code
 def isQuestion(text):
+    # Call server and get result
     result = core.run_query("SELECT text FROM chatbot WHERE isQuestion = 1")
 
-    print(result[0])
+    # Convert result to array
+    questions = []
+    for index, row in result.iterrows():
+        questions.append(row['text'])
+
 
 
 isQuestion('yeet')
