@@ -33,8 +33,12 @@ def isQuestion(text):
     for string in answers:
         answersSum += cosineSimilarity.cosineSimilarity(text, string)
 
-    print(questionsSum)
-    print(answersSum)
+    # Getting means of both similarities
+    questionsMean = questionsSum / len(questions)
+    answersMean = answersSum / len(answers)
+
+    print(questionsMean)
+    print(answersMean)
 
 
 isQuestion('what is the answer to life')
