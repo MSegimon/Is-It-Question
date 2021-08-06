@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import time
 
 # Other files
 import core
@@ -39,12 +40,18 @@ def isQuestion(text):
     answersMean = answersSum / len(answers)
 
     # check if it is question
-    if otherFunctions.percentageDiff(questionsMean, answersMean) <= 40:
-        print('Unknown')
-    elif questionsMean > answersMean:
-        print('its a question')
-    elif answersMean > questionsMean:
-        print('it is not a question')
+    threshold = 40  # I just found 40 to be a good threshold it might be changed with further training
+    # The resone for the unknown option is so that manual sorting of text can happen in the begining stages
+    if questionsMean > answersMean:
+        if otherFunctions.percentageDiff(questionsMean, answersMean) <= threshold:
+            print('Unknown')
+        else:
+            print('its a question')
+    else:
+        if otherFunctions.percentageDiff(answersMean, questionsMean) <= threshold:
+            print('Unknown')
+        else:
+            print('it is not a question')
 
 
 isQuestion('this is america')
