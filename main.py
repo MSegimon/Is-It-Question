@@ -54,7 +54,7 @@ def isQuestion(text):
             print('it is not a question')
 
 
-isQuestion('this is america')
+isQuestion('what is the answer to life the universe and everything')
 
 # Disconnect from server
 core.disconnect()
