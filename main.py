@@ -1,16 +1,60 @@
 import pandas as pd
 import numpy as np
+import time
 
 # Other files
 import core
 import cosineSimilarity
+import otherFunctions
 
 
 # Establish connection
 core.connect()
 
 # Main code
+def isQuestion(text):
+    # Call server and get result
+    questionsResult = core.run_query("SELECT text FROM chatbot WHERE isQuestion = 1")
+    answersResult = core.run_query("SELECT text FROM chatbot WHERE isQuestion = 0")
 
+    # Convert question and answer result to arrays
+    questions = []
+    answers = []
+    for index, row in questionsResult.iterrows():
+        questions.append(row['text'])
+
+    for index, row in answersResult.iterrows():
+        answers.append(row['text'])
+
+    # Get the sum of cosine similarities
+    questionsSum = 0.0
+    answersSum = 0.0
+    for string in questions:
+        questionsSum += cosineSimilarity.cosineSimilarity(text, string)
+    
+    for string in answers:
+        answersSum += cosineSimilarity.cosineSimilarity(text, string)
+
+    # Getting means of both similarities
+    questionsMean = questionsSum / len(questions)
+    answersMean = answersSum / len(answers)
+
+    # check if it is question
+    threshold = 40  # I just found 40 to be a good threshold it might be changed with further training
+    # The resone for the unknown option is so that manual sorting of text can happen in the begining stages
+    if questionsMean > answersMean:
+        if otherFunctions.percentageDiff(questionsMean, answersMean) <= threshold:
+            print('Unknown')
+        else:
+            print('its a question')
+    else:
+        if otherFunctions.percentageDiff(answersMean, questionsMean) <= threshold:
+            print('Unknown')
+        else:
+            print('it is not a question')
+
+
+isQuestion('what is the answer to life the universe and everything')
 
 # Disconnect from server
 core.disconnect()
