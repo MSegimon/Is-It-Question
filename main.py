@@ -45,6 +45,8 @@ def isQuestion(text):
     if questionsMean > answersMean:
         if otherFunctions.percentageDiff(questionsMean, answersMean) <= threshold:
             print('Unknown')
+            core.run_insert_query(
+                "INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',2,'',0," + str(int(time.time())) + ")")
         else:
             print('its a question')
             core.run_insert_query(
@@ -52,11 +54,15 @@ def isQuestion(text):
     else:
         if otherFunctions.percentageDiff(answersMean, questionsMean) <= threshold:
             print('Unknown')
+            core.run_insert_query(
+                "INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',2,'',0," + str(int(time.time())) + ")")
         else:
             print('it is not a question')
+            core.run_insert_query(
+                "INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',0,'',0," + str(int(time.time())) + ")")
 
 
-isQuestion('what is the answer to life the universe and everything')
+isQuestion('as many as the Irish can produce')
 
 # Disconnect from server
 core.disconnect()
