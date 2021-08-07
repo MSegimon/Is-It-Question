@@ -1,5 +1,5 @@
 # Is It Question
-This program server to determine wether a sentence is a question or not. It does this by comparing the means of the cosine similarities between the sentence that you are trying to check and a database of predetermined questions and not questions.
+This program server to determine wether a sentence is a question or not. It does this by comparing the means of the cosine similarities between the sentence that you are trying to check and a database of predetermined questions and not questions. It was developed for my chatbot program.
 ## Next Steps
 The next step of this project would be to further train the program by feeding it more sentences. This would not only help the accuracy of the program but it would also help me better determine the threshold value for the percentage difference of the two means.
 ## Get It Running
