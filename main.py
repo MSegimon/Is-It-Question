@@ -14,8 +14,8 @@ core.connect()
 # Main code
 def isQuestion(text):
     # Call server and get result
-    questionsResult = core.run_query("SELECT text FROM chatbot WHERE isQuestion = 1")
-    answersResult = core.run_query("SELECT text FROM chatbot WHERE isQuestion = 0")
+    questionsResult = core.run_read_query("SELECT text FROM chatbot WHERE isQuestion = 1")
+    answersResult = core.run_read_query("SELECT text FROM chatbot WHERE isQuestion = 0")
 
     # Convert question and answer result to arrays
     questions = []
@@ -45,16 +45,24 @@ def isQuestion(text):
     if questionsMean > answersMean:
         if otherFunctions.percentageDiff(questionsMean, answersMean) <= threshold:
             print('Unknown')
+            core.run_insert_query(
+                "INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',2,'',0," + str(int(time.time())) + ")")
         else:
             print('its a question')
+            core.run_insert_query(
+                "INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',1,'',0," + str(int(time.time())) + ")")
     else:
         if otherFunctions.percentageDiff(answersMean, questionsMean) <= threshold:
             print('Unknown')
+            core.run_insert_query(
+                "INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',2,'',0," + str(int(time.time())) + ")")
         else:
             print('it is not a question')
+            core.run_insert_query(
+                "INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',0,'',0," + str(int(time.time())) + ")")
 
 
-isQuestion('what is the answer to life the universe and everything')
+isQuestion('as many as the Irish can produce')
 
 # Disconnect from server
 core.disconnect()

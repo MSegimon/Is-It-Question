@@ -46,8 +46,8 @@ def mysql_connect():
         port=tunnel.local_bind_port
     )
 
-# Run SQL query
-def run_query(sql):
+# Run read SQL query
+def run_read_query(sql):
     """Runs a given SQL query via the global database connection.
     
     :param sql: MySQL query
@@ -55,6 +55,13 @@ def run_query(sql):
     """
 
     return pd.read_sql_query(sql, connection)
+
+def run_insert_query(sql):
+    cursor = connection.cursor()
+
+    cursor.execute(sql)
+
+    connection.commit()
 
 
 # Disconnect and close the tunnel
